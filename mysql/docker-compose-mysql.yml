@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: mysql_db
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: sample_database
+      MYSQL_USER: sample_user
+      MYSQL_PASSWORD: sample_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:
